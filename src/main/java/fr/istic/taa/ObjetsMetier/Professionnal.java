@@ -3,10 +3,14 @@ package fr.istic.taa.ObjetsMetier;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("P")
+@XmlRootElement(name="Professionnal")
 public class Professionnal extends User implements Serializable {
 
 	protected String job;
@@ -33,6 +37,7 @@ public class Professionnal extends User implements Serializable {
 
 
 	@OneToOne
+	@XmlElement(name="agenda")
 	public Agenda getAg() {
 		return ag;
 	}
@@ -42,6 +47,7 @@ public class Professionnal extends User implements Serializable {
 	}
 
 	@OneToOne
+	@XmlElement(name="account")
 	public Account getAc() {
 		return ac;
 	}
@@ -50,6 +56,7 @@ public class Professionnal extends User implements Serializable {
 		this.ac = ac;
 	}
 
+	@XmlElement(name="job")
 	public String getJob() {
 		return job;
 	}

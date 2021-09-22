@@ -1,14 +1,18 @@
 package fr.istic.taa.ObjetsMetier;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name="Appointment")
 public class Appointment implements Serializable{
 
 	/**
@@ -17,22 +21,39 @@ public class Appointment implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private int duration;
-	private String subject;
 	private boolean libre;
+	private String date;
+	private String subject;
 	private User u;
 	private Professionnal p;
 	private Agenda a;
 	
 	
-	public Appointment(int duration, String subject, boolean libre, User u, Professionnal p) {
+	public Appointment(int duration, boolean libre, String date, String subject, User u, Professionnal p) {
 		super();
 		this.duration = duration;
-		this.subject = subject;
 		this.libre = libre;
-		this.u=u;
-		this.p=p;
+		this.date = date;
+		this.subject = subject;
+		this.u = u;
+		this.p = p;
 	}
 	
+	
+
+
+	@XmlElement(name="date")
+	public String getDate() {
+		return date;
+	}
+
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
 
 	public Appointment(){
 		super();
@@ -49,6 +70,7 @@ public class Appointment implements Serializable{
 		this.id = id;
 	}
 
+	@XmlElement(name="duree")
 	public int getDuration() {
 		return duration;
 	}
@@ -58,7 +80,7 @@ public class Appointment implements Serializable{
 		this.duration = duration;
 	}
 
-
+	@XmlElement(name="objet")
 	public String getSubject() {
 		return subject;
 	}
@@ -68,17 +90,8 @@ public class Appointment implements Serializable{
 		this.subject = subject;
 	}
 
-
-	public boolean isLibre() {
-		return libre;
-	}
-
-
-	public void setLibre(boolean libre) {
-		this.libre = libre;
-	}
-
 	@OneToOne
+	@XmlElement(name="user")
 	public User getU() {
 		return u;
 	}
@@ -88,6 +101,7 @@ public class Appointment implements Serializable{
 	}
 
 	@OneToOne
+	@XmlElement(name="professionnal")
 	public Professionnal getP() {
 		return p;
 	}
@@ -97,6 +111,7 @@ public class Appointment implements Serializable{
 	}
 
 	@ManyToOne
+	@XmlElement(name="agenda")
 	public Agenda getA() {
 		return a;
 	}
@@ -104,6 +119,16 @@ public class Appointment implements Serializable{
 
 	public void setA(Agenda a) {
 		this.a = a;
+	}
+
+	@XmlElement(name="libre")
+	public boolean isLibre() {
+		return libre;
+	}
+
+
+	public void setLibre(boolean libre) {
+		this.libre = libre;
 	}
 
 

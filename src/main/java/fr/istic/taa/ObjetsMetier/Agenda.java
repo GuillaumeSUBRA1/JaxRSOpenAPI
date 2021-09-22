@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
+@XmlRootElement(name="Agenda")
 public class Agenda implements Serializable{
 
 	/**
@@ -43,6 +46,7 @@ public class Agenda implements Serializable{
 		this.id = id;
 	}
 
+	@XmlElement(name="url")
 	public String getUrl() {
 		return url;
 	}
@@ -52,6 +56,7 @@ public class Agenda implements Serializable{
 	}
 	
 	@OneToMany(mappedBy="a")
+	@XmlElement(name="listappointment")
 	public Collection<Appointment> getA() {
 		return a;
 	}
@@ -61,6 +66,7 @@ public class Agenda implements Serializable{
 	}
 
 	@OneToOne
+	@XmlElement(name="professionnal")
 	public Professionnal getP() {
 		return p;
 	}

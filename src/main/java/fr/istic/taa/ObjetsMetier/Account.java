@@ -3,10 +3,14 @@ package fr.istic.taa.ObjetsMetier;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 
 @Entity
+@XmlRootElement(name="Account")
 public class Account implements Serializable{
 	
 	/**
@@ -49,6 +53,7 @@ public class Account implements Serializable{
 		this.id = id;
 	}
 
+	@XmlElement(name="password")
 	public String getPassword() {
 		return password;
 	}
@@ -57,6 +62,7 @@ public class Account implements Serializable{
 		this.password = password;
 	}
 
+	@XmlElement(name="login")
 	public String getLogin() {
 		return login;
 	}
@@ -65,6 +71,8 @@ public class Account implements Serializable{
 		this.login = login;
 	}
 
+	@OneToOne
+	@XmlElement(name="professionnal")
 	public Professionnal getP() {
 		return p;
 	}

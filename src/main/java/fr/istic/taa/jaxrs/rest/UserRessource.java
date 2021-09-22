@@ -1,5 +1,7 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,12 +23,19 @@ public class UserRessource {
 	  public User getUserById(@PathParam("userId") Long userId)  {
 	      return new User("john","rambo");
 	  }
+	  
+	  @GET
+	  @Path("/ListUsers")
+	  public List<User> ListUser(){
+		  UserDao uDao=new UserDao();
+		  List<User> LU=uDao.findAll();
+		  return LU;
+	  }
 
 	  @POST
 	  @Consumes("application/json")
-	  public Response addUser(
-	      @Parameter(description = "User object that needs to be added to the store", required = true) User user) {
-	    return Response.ok().entity("SUCCESS").build();
+	  public Response addUser(@Parameter(description = "User object that needs to be added to the store", required = true) User user) {
+		  return Response.ok().entity("SUCCESS").build();
 	  }
 
 }
